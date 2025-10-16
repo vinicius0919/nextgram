@@ -1,6 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 
+import GitHub from "next-auth/providers/github"
 import google from "next-auth/providers/google";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -11,7 +12,7 @@ const prisma = new PrismaClient();
 const config = {
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
-  providers: [google],
+  providers: [google, GitHub],
   callbacks: {
     session({ session, token }) {
       if (session.user) {

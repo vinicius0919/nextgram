@@ -1,42 +1,73 @@
 import { auth, signIn, signOut } from "auth";
 import Link from "next/link";
+import { getUserByEmail } from "../actions";
+import Image from "next/image";
+import Button from "./Button";
+import ButtonLink from "./ButtonLink";
 
 const Navbar = async () => {
   const session = await auth();
 
+  const user = await getUserByEmail(session?.user?.email);
   return (
-    <div className="bg-gray-800 text-white p-4 flex justify-between items-center">
-      <Link href="/" className="text-white text-lg font-bold">
-        Home
+    <div className="bg-gray-800 text-white px-10 py-5 flex justify-between items-center">
+      <Link
+        href="/"
+        className="text-white hover:text-zinc-200 text-lg font-bold"
+      >
+        NextGram
       </Link>
 
       <div>
-        {session && session.user ? (
+        {user ? (
           // login
           <div className="flex items-center gap-4">
             {/* name, email, image */}
 
-            <p>{session.user.name}</p>
+            <p className="text-white font-medium">{user.name}</p>
+            {user?.image && (
+              <Image
+                src={user.image || ""}
+                alt={user.name || ""}
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full"
+              />
+            )}
+            <Link
+              href="/profile"
+              className="text-white font-medium hover:text-zinc-200"
+            >
+              Perfil
+            </Link>
+            <Link
+              href="/post/new"
+              className="text-white font-medium hover:text-zinc-200"
+            >
+              Novo Post
+            </Link>
+            <Link
+              href="/my-posts"
+              className="text-white font-medium hover:text-zinc-200"
+            >
+              Meus Posts
+            </Link>
             <form
               action={async () => {
                 "use server";
                 await signOut();
               }}
             >
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                Sair
-              </button>
+              <Button text="Sair" danger={true} />
             </form>
           </div>
         ) : (
           // logout
 
-          <Link
-            href="/signin"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Entrar
-          </Link>
+          <ButtonLink
+            url="/signin"
+            text="Entrar"
+          />
         )}
       </div>
     </div>
