@@ -1,2 +1,9 @@
 @import "tailwindcss";
 
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-geist-sans), sans-serif;
+}

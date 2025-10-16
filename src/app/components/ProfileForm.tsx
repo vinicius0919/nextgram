@@ -1,24 +1,27 @@
 "use client";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { updateUserProfile } from "../actions";
 import { User } from "next-auth";
 import Label from "./Label";
 import Button from "./Button";
 import ImagePreview from "./ImagePreview";
+import FlashMessage from "./FlashMessage";
 
 type ProfileFormProps = {
   user: User;
 };
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
-  const [formState, setFormState] = useFormState(updateUserProfile, {
+  const [formState, formAction] = useActionState(updateUserProfile, {
     message: "",
     type: "success",
   });
   return (
     <div>
-      {formState.message && <p>{formState.message}</p>}
-      <form className="flex flex-col gap-4" >
+      {formState.message && (
+        <FlashMessage message={formState.message} type={formState.type} />
+      )}
+      <form className="flex flex-col gap-4" action={formAction}>
         <input type="hidden" name="id" value={user.id} />
         <div>
           <Label htmlFor="name" text="Nome" />

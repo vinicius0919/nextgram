@@ -16,7 +16,7 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className="w-[35rem] mx-auto my-10 p-4" >
+    <div className="w-[35rem] max-sm:w-full mx-auto my-10 p-4" >
       <h1 className="text-[2rem] leading-10 font-semibold text-center" >Perfil de {user.name}</h1>
       <div className="w-full flex justify-center my-6">
         <Image

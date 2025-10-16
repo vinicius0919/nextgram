@@ -10,13 +10,13 @@ const ImagePreview = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImagePreview(reader.result as string);
-            setSelectedImage(file);
-        };
-        reader.readAsDataURL(file);
-    } 
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+        setSelectedImage(file);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
