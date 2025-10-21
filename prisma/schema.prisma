@@ -3,9 +3,11 @@
 // npx prisma generate
 // npx prisma migrate reset
 
+// set postgree
+
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
  
 generator client {
