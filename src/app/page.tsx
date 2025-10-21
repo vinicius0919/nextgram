@@ -1,6 +1,5 @@
 import { auth } from "auth";
 import { getAllPosts } from "./actions";
-import Link from "next/link";
 import Post from "./components/Post";
 
 export default async function Home() {

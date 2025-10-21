@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const NotFound = () => {
+const NotFoundContent = () => {
   // get param error from url
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
@@ -35,6 +36,14 @@ const NotFound = () => {
         Voltar para a pagina inicial
       </Link>
     </div>
+  );
+};
+
+const NotFound = () => {
+  return (
+    <Suspense fallback={<div className="text-center mt-10">Carregando...</div>}>
+      <NotFoundContent />
+    </Suspense>
   );
 };
 

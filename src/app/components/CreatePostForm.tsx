@@ -5,7 +5,7 @@ import Label from "./Label";
 import { createPost } from "../actions";
 import ImagePreview from "./ImagePreview";
 import Button from "./Button";
-
+const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB
 const CreatePostForm: React.FC = () => {
   const [formState, formAction] = useActionState(createPost, {
     message: "",
@@ -30,7 +30,8 @@ const CreatePostForm: React.FC = () => {
           ></textarea>
         </div>
         <div className="flex justify-end">
-          <Button type="submit" text="Criar Post" />
+          {fileSize < MAX_FILE_SIZE && <Button type="submit" text="Salvar" />}
+          {fileSize > MAX_FILE_SIZE && <Button text="Salvar" disabled />}
         </div>
       </form>
     </div>

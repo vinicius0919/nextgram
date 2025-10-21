@@ -114,7 +114,6 @@ export async function createPost(
   }
 
   // criar o post
-  let imageUrl;
   const uploadDir = path.join(process.cwd(), "public", "uploads");
   // cria o diretorio se nao existir
   await fs.mkdir(uploadDir, { recursive: true });
@@ -124,7 +123,7 @@ export async function createPost(
   await fs.writeFile(filePath, Buffer.from(arrayBuffer));
 
   // caminho para salvar no banco
-  imageUrl = `/uploads/${imageFile.name}`;
+  const imageUrl = `/uploads/${imageFile.name}`;
 
   await prisma.post.create({
     data: {

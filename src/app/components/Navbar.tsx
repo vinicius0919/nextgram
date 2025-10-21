@@ -1,4 +1,4 @@
-import { auth, signIn, signOut } from "auth";
+import { auth, signOut } from "auth";
 import Link from "next/link";
 import { getUserByEmail } from "../actions";
 import Image from "next/image";
